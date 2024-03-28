@@ -42,7 +42,7 @@ const Navbar = () => {
             <Link href="/profile">
               <Image
                 className="rounded-full"
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 width={37}
                 height={37}
                 alt="Profile Image"
@@ -75,11 +75,11 @@ const Navbar = () => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/logo.svg"
+              src={session?.user.image}
               width={37}
               height={37}
               className="rounded-full cursor-pointer"
-              alt="profile"
+              alt="Profile image"
               onClick={(e) => {
                 e.preventDefault();
                 setToggleDropDown((preValue) => !preValue);
@@ -126,7 +126,7 @@ const Navbar = () => {
                       e.preventDefault();
                       signIn(eachProvider.id);
                     }}
-                    className="black_btn"
+                    className="green_btn"
                   >
                     Sign In
                   </button>

@@ -10,38 +10,40 @@ const handleGoogleAuth = NextAuth({
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     }),
   ],
-  async session({ session }) {
-    const user = await User.findOne({ email: session.user.email });
+  callbacks: {
+    async session({ session }) {
+      const user = await User.findOne({ email: session.user.email });
 
-    session.user.id = user._id;
+      session.user.id = user._id;
 
-    return session;
-  },
-  async signIng({ profile }) {
-    try {
-      // every nextJS route is a serverless route,
-      // which means they are LAMBDA functions,
-      // i.e they work only when they are actually needed,
-      // e.g: the mongoDB server will not keep on running
+      return session;
+    },
+    async signIn({ profile }) {
+      try {
+        // every nextJS route is a serverless route,
+        // which means they are LAMBDA functions,
+        // i.e they work only when they are actually needed,
+        // e.g: the mongoDB server will not keep on running
 
-      await connectToDB();
+        await connectToDB();
 
-      // check if a user already exists, if not create a new user
-      const alreadyExists = await User.findOne({ email: profile.email });
+        // check if a user already exists, if not create a new user
+        const alreadyExists = await User.findOne({ email: profile.email });
 
-      if (!alreadyExists) {
-        User.create({
-          email: profile.email,
-          username: profile.name.replace(" ", "").toLowerCase(),
-          image: profile.picture,
-        });
+        if (!alreadyExists) {
+          User.create({
+            email: profile.email,
+            username: profile.name.replace(" ", "").toLowerCase(),
+            image: profile.picture,
+          });
+        }
+
+        return true;
+      } catch (error) {
+        console.log(error.message);
+        return false;
       }
-
-      return true;
-    } catch (error) {
-      console.log(error.message);
-      return false;
-    }
+    },
   },
 });
 
