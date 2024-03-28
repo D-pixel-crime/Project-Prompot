@@ -6,16 +6,16 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const userLoggedInOrNot = true;
+  const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropDown, setToggleDropDown] = useState(false);
 
   useEffect(() => {
-    const setProviders = async () => {
+    const buildProviders = async () => {
       const res = await getProviders();
       setProviders(res);
     };
-    setProviders();
+    buildProviders();
   }, []);
 
   return (
@@ -31,7 +31,7 @@ const Navbar = () => {
         <p className="logo_text">Prompot</p>
       </Link>
       <div className="sm:flex hidden">
-        {userLoggedInOrNot ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="outline_black_btn">
               Create Post
@@ -61,7 +61,7 @@ const Navbar = () => {
                       e.preventDefault();
                       signIn(eachProvider.id);
                     }}
-                    className="black_btn"
+                    className="green_btn"
                   >
                     Sign In
                   </button>
@@ -72,7 +72,7 @@ const Navbar = () => {
       </div>
 
       <div className="sm:hidden flex relative">
-        {userLoggedInOrNot ? (
+        {session?.user ? (
           <div className="flex">
             <Image
               src="/assets/images/logo.svg"

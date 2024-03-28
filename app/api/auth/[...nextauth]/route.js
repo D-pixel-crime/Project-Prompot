@@ -1,11 +1,7 @@
+import { User } from "@models/user";
 import { connectToDB } from "@utils/database";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
-console.log(
-  process.env.GOOGLE_OAUTH_CLIENTID,
-  process.env.GOOGLE_OAUTH_CLIENT_SECRET
-);
 
 const handleGoogleAuth = NextAuth({
   providers: [
@@ -14,7 +10,13 @@ const handleGoogleAuth = NextAuth({
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     }),
   ],
-  async session({ session }) {},
+  async session({ session }) {
+    const user = await User.findOne({ email: session.user.email });
+
+    session.user.id = user._id;
+
+    return session;
+  },
   async signIng({ profile }) {
     try {
       // every nextJS route is a serverless route,
@@ -25,6 +27,15 @@ const handleGoogleAuth = NextAuth({
       await connectToDB();
 
       // check if a user already exists, if not create a new user
+      const alreadyExists = await User.findOne({ email: profile.email });
+
+      if (!alreadyExists) {
+        User.create({
+          email: profile.email,
+          username: profile.name.replace(" ", "").toLowerCase(),
+          image: profile.picture,
+        });
+      }
 
       return true;
     } catch (error) {
