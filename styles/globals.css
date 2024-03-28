@@ -121,7 +121,7 @@
 }
 
 .glassmorphism {
-    @apply rounded-xl border border-gray-200 bg-white/20 backdrop-blur p-5;
+    @apply rounded-xl border border-green-300/70 bg-green-200/40 backdrop-blur p-5;
     box-shadow: inset 10px -50px 94px 0 rgba(199, 199, 199, 0.2);
 }
 
