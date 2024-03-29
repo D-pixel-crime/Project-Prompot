@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+const Form = ({
+  type,
+  postPrompt,
+  setPostPrompt,
+  tag,
+  setTag,
+  submitting,
+  handleSubmit,
+}) => {
   return (
     <section className="w-full max-w-ful flex-center flex-col mb-5">
       <h1 className="head_text text-left">
@@ -13,16 +21,16 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
+        className="mt-10 w-full max-w-2xl flex flex-col gap-7 green_glassmorphism"
       >
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Your AI Prompt
           </span>
           <textarea
-            value={post.prompt}
+            value={postPrompt}
             onChange={(event) => {
-              setPost({ ...setPost, prompt: event.target.value });
+              setPostPrompt(event.target.value);
             }}
             placeholder="Enter Your Prompt Here"
             required
@@ -38,9 +46,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             </span>
           </span>
           <input
-            value={post.tag}
+            value={tag}
             onChange={(event) => {
-              setPost({ ...setPost, tag: event.target.value });
+              setTag(event.target.value);
             }}
             placeholder="#placeYourTagsHere"
             required
