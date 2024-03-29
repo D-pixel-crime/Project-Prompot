@@ -6,6 +6,14 @@ import { useState } from "react";
 const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   const [copiedOrNot, setCopiedOrNot] = useState("");
 
+  const handleCopy = () => {
+    setCopiedOrNot(prompt.prompt);
+    navigator.clipboard.writeText(prompt.prompt);
+    setTimeout(() => {
+      setCopiedOrNot("");
+    }, 2000);
+  };
+
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
@@ -27,7 +35,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
             </p>
           </div>
         </div>
-        <div className="copy_btn" onClick={() => {}}>
+        <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copiedOrNot === prompt.prompt
@@ -36,12 +44,13 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
             }
             width={20}
             height={20}
+            alt="Copy Icon"
           />
         </div>
       </div>
       <p className="my-4 font-satoshi text-sm text-gary-700">{prompt.prompt}</p>
       <p
-        className="font-inter text-sm text-cyan-500 cursor-pointer"
+        className="font-inter text-sm text-cyan-500 cursor-pointer hover:underline w-fit"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
         {prompt.tag}
