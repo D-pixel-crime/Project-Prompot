@@ -33,9 +33,46 @@ const Feed = () => {
     fetchPrompts();
   }, []);
 
+  useEffect(() => {
+    const handleSearch = async () => {
+      if (searchText) {
+        try {
+          const { data } = await axios.post("/api/prompt/search", {
+            searchText: searchText,
+          });
+
+          setPrompts(data);
+          return;
+        } catch (error) {
+          return console.log(error);
+        }
+      } else {
+        try {
+          const { data } = await axios.get("/api/prompt");
+
+          setPrompts(data);
+          return;
+        } catch (error) {
+          return console.log(error);
+        }
+      }
+    };
+    handleSearch();
+  }, [searchText]);
+
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+  };
+
   return (
     <section className="feed">
-      <form className="relative flex-center w-full">
+      <form
+        className="relative flex-center w-full"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}
+      >
         <input
           type="text"
           placeholder="Search For A Prompt or Tag or Username"
@@ -48,7 +85,7 @@ const Feed = () => {
         />
       </form>
 
-      <ListPrompt data={prompts} />
+      <ListPrompt data={prompts} handleTagClick={handleTagClick} />
     </section>
   );
 };
