@@ -1,10 +1,15 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   const [copiedOrNot, setCopiedOrNot] = useState("");
+  const pathname = usePathname();
+  const { data: session } = useSession();
+  const router = useRouter();
 
   const handleCopy = () => {
     setCopiedOrNot(prompt.prompt);
@@ -27,12 +32,10 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
           />
 
           <div className="flex flex-col">
-            <h3 className="font-satoshi text-sm font-semibold text-gray-900">
+            <h3 className="text-sm font-semibold text-gray-900">
               {prompt.creator.username}
             </h3>
-            <p className="font-inter text-xs text-gray-500">
-              {prompt.creator.email}
-            </p>
+            <p className="text-xs text-gray-400">{prompt.creator.email}</p>
           </div>
         </div>
         <div className="copy_btn" onClick={handleCopy}>
@@ -48,13 +51,34 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
           />
         </div>
       </div>
-      <p className="my-4 font-satoshi text-sm text-gary-700">{prompt.prompt}</p>
+      <p className="my-4 text-sm text-black mt-7">{prompt.prompt}</p>
       <p
-        className="font-inter text-sm text-cyan-500 cursor-pointer hover:underline w-fit"
+        className="text-sm text-cyan-500 cursor-pointer hover:underline w-fit"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
         {prompt.tag}
       </p>
+
+      {session?.user.id === prompt.creator._id && pathname === "/profile" ? (
+        <div className="flex-between mt-5 mb-2 mx-1">
+          <Image
+            src="/assets/icons/edit.svg"
+            width={22}
+            height={22}
+            alt="Edit Prompt"
+            className="cursor-pointer bg-gray-300 p-1.5 rounded-full size-8"
+          />
+          <Image
+            src="/assets/icons/delete.svg"
+            width={22}
+            height={22}
+            alt="Delete Prompt"
+            className="cursor-pointer bg-gray-300 p-1.5 rounded-full size-8"
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

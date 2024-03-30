@@ -88,7 +88,7 @@ const Navbar = () => {
             {toggleDropDown && (
               <div className="dropdown">
                 <Link
-                  href="/"
+                  href="/profile"
                   className="dropdown_link"
                   onClick={() => setToggleDropDown(false)}
                 >

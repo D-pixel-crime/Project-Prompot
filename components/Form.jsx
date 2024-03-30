@@ -24,7 +24,7 @@ const Form = ({
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 green_glassmorphism"
       >
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-700">
+          <span className="font-semibold text-base text-gray-700">
             Your AI Prompt
           </span>
           <textarea
@@ -39,7 +39,7 @@ const Form = ({
         </label>
 
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-700">
+          <span className="font-semibold text-base text-gray-700">
             Tags {` `}
             <span className="text-normal">
               (#webdevelopment, #creative, #informative, etc.)
