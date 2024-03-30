@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,11 +10,10 @@
 */
 
 * {
-    font-family: "Fredericka the Great",
-        serif;
+    font-family: "Quicksand",
+        sans-serif;
 
     font-weight: bold;
-    letter-spacing: 1px;
 }
 
 .main {
