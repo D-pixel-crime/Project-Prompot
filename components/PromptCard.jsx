@@ -22,7 +22,10 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer hover:underline"
+          onClick={() => router.push(`/viewProfile?id=${prompt.creator._id}`)}
+        >
           <Image
             src={prompt.creator.image}
             alt="User-Image"
