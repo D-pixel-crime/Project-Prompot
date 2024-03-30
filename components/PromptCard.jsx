@@ -66,14 +66,16 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
             width={22}
             height={22}
             alt="Edit Prompt"
-            className="cursor-pointer bg-gray-300 p-1.5 rounded-full size-8"
+            onClick={handleEdit}
+            className="cursor-pointer bg-white p-1.5 rounded-full size-8"
           />
           <Image
             src="/assets/icons/delete.svg"
             width={22}
             height={22}
             alt="Delete Prompt"
-            className="cursor-pointer bg-gray-300 p-1.5 rounded-full size-8"
+            onClick={handleDelete}
+            className="cursor-pointer bg-white p-1.5 rounded-full size-8"
           />
         </div>
       ) : (

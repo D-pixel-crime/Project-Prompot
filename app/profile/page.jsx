@@ -26,8 +26,10 @@ const ProfilePage = () => {
     }
   }, []);
 
-  const handleEdit = async () => {};
-  const handleDelete = async () => {};
+  const handleEdit = async (prompt) => {
+    router.push(`/update-prompt?id=${prompt._id}`);
+  };
+  const handleDelete = async (prompt) => {};
 
   return (
     <ProfileView

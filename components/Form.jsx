@@ -12,16 +12,24 @@ const Form = ({
   return (
     <section className="w-full max-w-ful flex-center flex-col mb-5">
       <h1 className="head_text text-left">
-        <span className="green_gradient">{type} Prompt</span>
+        <span
+          className={type === "Update" ? "blue_gradient" : "green_gradient"}
+        >
+          {type} Prompt
+        </span>
       </h1>
       <p className="desc text-left max-w-md">
-        {type} and share extraordinary prompts for the global audience, allowing
-        your creativity to kick-start someone's AI conversation.
+        {type === "Update"
+          ? `${type} your prompt and make it more efficient, effective.`
+          : `${type} and share extraordinary prompts for the global audience, allowing
+        your creativity to kick-start someone's AI conversation.`}
       </p>
 
       <form
         onSubmit={handleSubmit}
-        className="mt-10 w-full max-w-2xl flex flex-col gap-7 green_glassmorphism"
+        className={`mt-10 w-full max-w-2xl flex flex-col gap-7 ${
+          type === "Update" ? "blue_glassmorphism" : "green_glassmorphism"
+        }`}
       >
         <label>
           <span className="font-semibold text-base text-gray-700">
@@ -64,7 +72,9 @@ const Form = ({
           <button
             type="submit"
             disabled={submitting}
-            className="green_btn text-sm"
+            className={
+              type === "Update" ? "blue_btn text-sm" : "green_btn text-sm"
+            }
           >
             {submitting ? `${type}...` : type}
           </button>
