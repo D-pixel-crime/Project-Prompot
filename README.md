@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prompot
 
-## Getting Started
+The "Prompot" is a dynamic web application built using Next.js, MongoDB, and Google OAuth. This platform allows users to share their AI prompts, which others can copy and refer to for kickstarting conversations with AI chatbots like ChatGPT. With seamless authentication using Google OAuth, users can securely access and contribute to the platform's content, facilitating a collaborative environment for generating creative AI interactions.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Prompt Sharing**: Users can share their AI prompts with the community.
+- **Prompt Copying**: Other users can copy shared prompts to use with AI chatbots.
+- **Google OAuth Authentication**: Secure user authentication and authorization using Google OAuth.
+- **Search Functionality**: Easily find relevant prompts using the search feature.
+- **Exploration**: Easily dive onto other's profile to explore and learn from their creativity.
+- **Responsive Design**: The platform is optimized for various devices, including desktops, tablets, and mobile phones.
+
+## Technologies Used
+
+- **Next.js**: React framework for building server-rendered and statically-generated web applications.
+- **MongoDB**: NoSQL database used for storing user data, AI prompts, and other platform content.
+- **Google OAuth**: Authentication mechanism provided by Google for secure user sign-in.
+  
+## Installation
+
+1. Clone the repository:
+
+```
+git clone https://github.com/D-pixel-crime/Project-Prompot.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+cd "Project Prompot"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Install dependencies:
 
-## Learn More
+```
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Configure environment variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   - Create a `.env` file in the root directory.
+   - Define environment variables including MongoDB PASS, Google OAuth credentials, NEXT_AUTH credentials, etc.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Start the development server:
 
-## Deploy on Vercel
+```
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. Access the platform by visiting `http://localhost:3000` in your web browser.
