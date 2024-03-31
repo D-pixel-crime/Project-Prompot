@@ -9,7 +9,7 @@ const ProfileView = ({ name, desc, data, handleEdit, handleDelete }) => {
         </span>
         <p className="desc text-center sm:text-left">{desc}</p>
       </h1>
-      <div className="mt-10 prompt_layout">
+      <div className="mt-10 prompt_layout border-t-2 border-gray-400 border-dashed">
         {data.length > 0 ? (
           data.map((eachPrompt) => {
             return (
