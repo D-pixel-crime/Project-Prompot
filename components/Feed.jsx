@@ -23,6 +23,7 @@ const ListPrompt = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [prompts, setPrompts] = useState([]);
+  const [toggleSearchOptions, setToggleSearchOptions] = useState(false);
 
   useEffect(() => {
     const fetchPrompts = async () => {
@@ -73,6 +74,33 @@ const Feed = () => {
           handleSearch();
         }}
       >
+        <div className="flex">
+          <button
+            className="rounded-full cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              setToggleSearchOptions((preValue) => !preValue);
+            }}
+          >
+            SET
+          </button>
+          {toggleSearchOptions && (
+            <div className="dropdown z-50">
+              <div
+                className="dropdown_link"
+                onClick={() => setToggleSearchOptions(false)}
+              >
+                Search By Username or Tag
+              </div>
+              <div
+                className="dropdown_link"
+                onClick={() => setToggleSearchOptions(false)}
+              >
+                Search By Users
+              </div>
+            </div>
+          )}
+        </div>
         <input
           type="text"
           placeholder="Search For A Prompt or Tag or Username"
