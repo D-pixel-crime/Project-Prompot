@@ -177,8 +177,12 @@
     @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
 }
 
+.search_dropdown {
+    @apply absolute left-0 top-full mt-3 w-fit p-5 rounded-lg border border-gray-300 bg-gray-100/60 min-w-[210px] flex flex-col gap-2 justify-end items-start;
+}
+
 .dropdown_link {
-    @apply text-sm text-gray-700 hover:text-gray-500 font-medium;
+    @apply text-sm text-gray-700 font-medium cursor-pointer;
 }
 
 /* PromptCard Component */

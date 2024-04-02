@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PromptCard from "./PromptCard";
+import Image from "next/image";
 
 const ListPrompt = ({ data, handleTagClick }) => {
   return (
@@ -24,6 +25,7 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [prompts, setPrompts] = useState([]);
   const [toggleSearchOptions, setToggleSearchOptions] = useState(false);
+  const [isUserSearch, setIsUserSearch] = useState(false);
 
   useEffect(() => {
     const fetchPrompts = async () => {
@@ -76,25 +78,51 @@ const Feed = () => {
       >
         <div className="flex">
           <button
-            className="rounded-full cursor-pointer"
+            className="cursor-pointer mx-2 rounded-md border border-gray-200 bg-white p-2 text-sm shadow-lg font-medium focus:outline-none flex-center"
             onClick={(e) => {
               e.preventDefault();
               setToggleSearchOptions((preValue) => !preValue);
             }}
           >
-            SET
+            {isUserSearch ? (
+              <Image
+                src="/assets/icons/user.svg"
+                alt="search by user"
+                width={30}
+                height={30}
+              />
+            ) : (
+              <Image
+                src="/assets/icons/script.svg"
+                alt="search by user"
+                width={30}
+                height={30}
+              />
+            )}
+            <Image
+              src="/assets/icons/dropdown.svg"
+              alt="search by user"
+              width={30}
+              height={30}
+            />
           </button>
           {toggleSearchOptions && (
-            <div className="dropdown z-50">
+            <div className="search_dropdown z-10">
               <div
-                className="dropdown_link"
-                onClick={() => setToggleSearchOptions(false)}
+                className="dropdown_link hover:text-emerald-500"
+                onClick={() => {
+                  setIsUserSearch(false);
+                  setToggleSearchOptions(false);
+                }}
               >
-                Search By Username or Tag
+                Search By Prompt or Tag
               </div>
               <div
-                className="dropdown_link"
-                onClick={() => setToggleSearchOptions(false)}
+                className="dropdown_link hover:text-amber-500"
+                onClick={() => {
+                  setIsUserSearch(true);
+                  setToggleSearchOptions(false);
+                }}
               >
                 Search By Users
               </div>
@@ -103,7 +131,11 @@ const Feed = () => {
         </div>
         <input
           type="text"
-          placeholder="Search For A Prompt or Tag or Username"
+          placeholder={
+            isUserSearch
+              ? "Search For A Username"
+              : "Search For A Prompt or Tag"
+          }
           value={searchText}
           onChange={(event) => {
             setSearchText(event.target.value);
