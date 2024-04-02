@@ -40,16 +40,20 @@ const Feed = () => {
     const handleSearch = async () => {
       if (searchText) {
         try {
-          const { data } = await axios.post("/api/prompt/search", {
-            searchText: searchText,
-          });
+          const { data } = isUserSearch
+            ? await axios.post("/api/prompt/search/users", {
+                searchText: searchText,
+              })
+            : await axios.post("/api/prompt/search", {
+                searchText: searchText,
+              });
 
           setPrompts(data);
           return;
         } catch (error) {
           return console.log(error);
         }
-      } else {
+      } else if (searchText === "") {
         try {
           const { data } = await axios.get("/api/prompt");
 
@@ -69,13 +73,7 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form
-        className="relative flex-center w-full"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSearch();
-        }}
-      >
+      <form className="relative flex-center w-full">
         <div className="flex">
           <button
             className="cursor-pointer mx-2 rounded-md border border-gray-200 bg-white p-2 text-sm shadow-lg font-medium focus:outline-none flex-center"
