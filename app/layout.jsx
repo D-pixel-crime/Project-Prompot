@@ -1,6 +1,7 @@
 import Navbar from "@components/Navbar";
 import Provider from "@components/Provider";
 import "@styles/globals.css";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Prompot",
@@ -18,13 +19,15 @@ const RootLayout = ({ children }) => {
     <html lang="en">
       <body>
         <Provider>
-          <div className="main">
-            <div className="gradient" />
-          </div>
-          <main className="app">
-            <Navbar />
-            {children}
-          </main>
+          <Suspense fallback={null}>
+            <div className="main">
+              <div className="gradient" />
+            </div>
+            <main className="app">
+              <Navbar />
+              {children}
+            </main>
+          </Suspense>
         </Provider>
       </body>
     </html>
